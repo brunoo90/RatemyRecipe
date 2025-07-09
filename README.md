@@ -277,3 +277,63 @@ Dieses Projekt ist unter der MIT-Lizenz lizenziert - siehe [LICENSE](LICENSE) Da
 - [React](https://reactjs.org/) für das Frontend-Framework
 - [React Icons](https://react-icons.github.io/react-icons/) für die Icons
 - [Unsplash](https://unsplash.com/) für die Beispielbilder 
+
+---
+
+## 🗄️ Datenmodell
+
+```mermaid
+erDiagram
+    USER ||--o{ RECIPE : erstellt
+    USER ||--o{ RATING : gibt
+    USER ||--o{ FAVORITE : speichert
+    USER }o--|| ROLE : hat
+    RECIPE ||--o{ RATING : wird_bewertet
+    RECIPE ||--o{ FAVORITE : ist_favorit
+
+    USER {
+        Long id
+        String username
+        String email
+        String password
+    }
+    RECIPE {
+        Long id
+        String title
+        String description
+        String imageUrl
+        String category
+        Double averageRating
+        Integer ratingCount
+        String instructions
+        List<String> ingredients
+    }
+    RATING {
+        Long id
+        Integer stars
+        String comment
+    }
+    FAVORITE {
+        Long id
+    }
+    ROLE {
+        Long id
+        String name
+    }
+```
+
+---
+
+## 🗓️ Beispiel-Arbeitsplan (1 Woche)
+
+| Tag         | Aufgabe                                                                 |
+|-------------|-------------------------------------------------------------------------|
+| Tag 1 (Mo)  | Projekt-Setup, GitHub-Repo, Grundstruktur Backend & Frontend            |
+| Tag 2 (Di)  | Datenbankmodell & JPA-Entities, erste REST-Endpoints, User-Auth         |
+| Tag 3 (Mi)  | Frontend: Routing, Grundlayout, Auth-Formulare, API-Anbindung           |
+| Tag 4 (Do)  | Rezept-CRUD (Backend & Frontend), Testdaten, erste UI-Komponenten       |
+| Tag 5 (Fr)  | Bewertungssystem & Favoriten (Backend & Frontend), UI-Feinschliff       |
+| Tag 6 (Sa)  | Tests (Backend & Frontend), Fehlerbehandlung, Dokumentation             |
+| Tag 7 (So)  | Review, Refactoring, Deployment-Vorbereitung, Präsentation vorbereiten  |
+
+> Die Aufgaben können je nach Fortschritt und Teamgröße angepasst werden. 
