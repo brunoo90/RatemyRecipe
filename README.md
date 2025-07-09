@@ -292,4 +292,3 @@ Die API-Basis-URL kann in `src/services/api.js` konfiguriert werden.
 - [ ] Dokumentation vervollständigen
 - [ ] Deployment vorbereiten
 
-**Fortschritt:** 1/6 Termine abgeschlossen
