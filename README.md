@@ -245,3 +245,53 @@ Die API-Basis-URL kann in `src/services/api.js` konfiguriert werden.
 | Stunde 5    | Bewertungssystem & Favoriten (Backend & Frontend), UI-Feinschliff       |
 | Stunde 6    | Tests (Backend & Frontend), Fehlerbehandlung, Dokumentation             |
 | Stunde 7    | Review, Refactoring, Deployment-Vorbereitung, Präsentation vorbereiten  |
+
+> Die Aufgaben können je nach Fortschritt und Teamgröße angepasst werden.
+
+---
+
+## 📋 Arbeitsjournal
+
+### 12.06.2024 - Projektstart & Setup
+- [x] GitHub Repository erstellen
+- [x] Projektstruktur aufsetzen (Backend + Frontend)
+- [x] Entwicklungsumgebung konfigurieren
+- [x] Grundlegende Dependencies installieren
+- [x] Git-Branches erstellen (main, backend, frontend)
+
+### 19.06.2024 - Backend-Grundlagen
+- [ ] Spring Boot Anwendung konfigurieren
+- [ ] Datenbankmodell erstellen (JPA Entities)
+- [ ] Repository-Layer implementieren
+- [ ] Erste REST-Controller entwickeln
+- [ ] Spring Security mit JWT einrichten
+
+### 26.06.2024 - Frontend-Grundlagen
+- [ ] React-Anwendung mit Vite aufsetzen
+- [ ] Routing mit React Router implementieren
+- [ ] Grundlegende UI-Komponenten erstellen
+- [ ] API-Service für Backend-Kommunikation
+- [ ] Authentifizierung im Frontend
+
+### 03.07.2024 - Rezept-Management
+- [ ] CRUD-Operationen für Rezepte (Backend)
+- [ ] Rezept-Formulare im Frontend
+- [ ] Bild-Upload-Funktionalität
+- [ ] Kategorien-System implementieren
+- [ ] Suchfunktionalität entwickeln
+
+### 07.07.2024 - Bewertungen & Favoriten
+- [ ] Bewertungssystem implementieren (Backend)
+- [ ] Sternbewertungen im Frontend
+- [ ] Favoriten-System entwickeln
+- [ ] Durchschnittsbewertungen berechnen
+- [ ] Benutzer-spezifische Rezeptlisten
+
+### 08.07.2024 - Finalisierung & Deployment
+- [ ] Tests schreiben und ausführen
+- [ ] Fehlerbehandlung verbessern
+- [ ] UI/UX optimieren
+- [ ] Dokumentation vervollständigen
+- [ ] Deployment vorbereiten
+
+**Fortschritt:** 1/6 Termine abgeschlossen
