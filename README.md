@@ -234,18 +234,14 @@ Die API-Basis-URL kann in `src/services/api.js` konfiguriert werden.
 - `DELETE /api/favorites/{id}` - Aus Favoriten entfernen
 - `GET /api/favorites/user/{userId}` - Benutzer-Favoriten
 
+## 🗓️ Arbeitsplan
 
-## 🤝 Beitragen
-
-1. Fork das Repository
-2. Erstelle einen Feature-Branch (`git checkout -b feature/AmazingFeature`)
-3. Committe deine Änderungen (`git commit -m 'Add some AmazingFeature'`)
-4. Push zum Branch (`git push origin feature/AmazingFeature`)
-5. Öffne einen Pull Request
-
-## 🙏 Danksagungen
-
-- [Spring Boot](https://spring.io/projects/spring-boot) für das Backend-Framework
-- [React](https://reactjs.org/) für das Frontend-Framework
-- [React Icons](https://react-icons.github.io/react-icons/) für die Icons
-- [Unsplash](https://unsplash.com/) für die Beispielbilder 
+| Stunde      | Aufgabe                                                                 |
+|-------------|-------------------------------------------------------------------------|
+| Stunde 1    | Projekt-Setup, GitHub-Repo, Grundstruktur Backend & Frontend            |
+| Stunde 2    | Datenbankmodell & JPA-Entities, erste REST-Endpoints, User-Auth         |
+| Stunde 3    | Frontend: Routing, Grundlayout, Auth-Formulare, API-Anbindung           |
+| Stunde 4    | Rezept-CRUD (Backend & Frontend), Testdaten, erste UI-Komponenten       |
+| Stunde 5    | Bewertungssystem & Favoriten (Backend & Frontend), UI-Feinschliff       |
+| Stunde 6    | Tests (Backend & Frontend), Fehlerbehandlung, Dokumentation             |
+| Stunde 7    | Review, Refactoring, Deployment-Vorbereitung, Präsentation vorbereiten  |
