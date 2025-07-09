@@ -246,8 +246,6 @@ Die API-Basis-URL kann in `src/services/api.js` konfiguriert werden.
 | Stunde 6    | Tests (Backend & Frontend), Fehlerbehandlung, Dokumentation             |
 | Stunde 7    | Review, Refactoring, Deployment-Vorbereitung, Präsentation vorbereiten  |
 
-> Die Aufgaben können je nach Fortschritt und Teamgröße angepasst werden.
-
 ---
 
 ## 📋 Arbeitsjournal
