@@ -258,37 +258,37 @@ Die API-Basis-URL kann in `src/services/api.js` konfiguriert werden.
 - [x] Git-Branches erstellen (main, backend, frontend)
 
 ### 19.06.2024 - Backend-Grundlagen
-- [ ] Spring Boot Anwendung konfigurieren
-- [ ] Datenbankmodell erstellen (JPA Entities)
-- [ ] Repository-Layer implementieren
-- [ ] Erste REST-Controller entwickeln
-- [ ] Spring Security mit JWT einrichten
+- [X] Spring Boot Anwendung konfigurieren
+- [X] Datenbankmodell erstellen (JPA Entities)
+- [X] Repository-Layer implementieren
+- [X] Erste REST-Controller entwickeln
+- [X] Spring Security mit JWT einrichten
 
 ### 26.06.2024 - Frontend-Grundlagen
-- [ ] React-Anwendung mit Vite aufsetzen
-- [ ] Routing mit React Router implementieren
-- [ ] Grundlegende UI-Komponenten erstellen
-- [ ] API-Service für Backend-Kommunikation
-- [ ] Authentifizierung im Frontend
+- [X] React-Anwendung mit Vite aufsetzen
+- [X] Routing mit React Router implementieren
+- [X] Grundlegende UI-Komponenten erstellen
+- [X] API-Service für Backend-Kommunikation
+- [X] Authentifizierung im Frontend
 
 ### 03.07.2024 - Rezept-Management
-- [ ] CRUD-Operationen für Rezepte (Backend)
-- [ ] Rezept-Formulare im Frontend
-- [ ] Bild-Upload-Funktionalität
-- [ ] Kategorien-System implementieren
-- [ ] Suchfunktionalität entwickeln
+- [X] CRUD-Operationen für Rezepte (Backend)
+- [X] Rezept-Formulare im Frontend
+- [X] Bild-Upload-Funktionalität
+- [X] Kategorien-System implementieren
+- [X] Suchfunktionalität entwickeln
 
 ### 07.07.2024 - Bewertungen & Favoriten
-- [ ] Bewertungssystem implementieren (Backend)
-- [ ] Sternbewertungen im Frontend
-- [ ] Favoriten-System entwickeln
-- [ ] Durchschnittsbewertungen berechnen
-- [ ] Benutzer-spezifische Rezeptlisten
+- [X] Bewertungssystem implementieren (Backend)
+- [X] Sternbewertungen im Frontend
+- [X] Favoriten-System entwickeln
+- [X] Durchschnittsbewertungen berechnen
+- [X] Benutzer-spezifische Rezeptlisten
 
 ### 08.07.2024 - Finalisierung & Deployment
-- [ ] Tests schreiben und ausführen
-- [ ] Fehlerbehandlung verbessern
-- [ ] UI/UX optimieren
-- [ ] Dokumentation vervollständigen
-- [ ] Deployment vorbereiten
+- [X] Tests schreiben und ausführen
+- [X] Fehlerbehandlung verbessern
+- [X] UI/UX optimieren
+- [X] Dokumentation vervollständigen
+- [X] Deployment vorbereiten
 
