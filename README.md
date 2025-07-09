@@ -234,24 +234,6 @@ Die API-Basis-URL kann in `src/services/api.js` konfiguriert werden.
 - `DELETE /api/favorites/{id}` - Aus Favoriten entfernen
 - `GET /api/favorites/user/{userId}` - Benutzer-Favoriten
 
-## 🎯 Nächste Schritte
-
-### Geplante Features
-- [ ] **Bild-Upload**: Rezeptbilder hochladen und verwalten
-- [ ] **Kommentare**: Kommentar-System für Rezepte
-- [ ] **Soziale Features**: Rezepte teilen, folgen von Benutzern
-- [ ] **Erweiterte Suche**: Filter nach Zutaten, Zubereitungszeit, Schwierigkeit
-- [ ] **Mobile App**: React Native oder Flutter App
-- [ ] **Push-Benachrichtigungen**: Neue Rezepte, Bewertungen
-- [ ] **Meal Planning**: Wochenplanung mit Rezepten
-- [ ] **Nährwertangaben**: Kalorien, Makronährstoffe
-
-### Verbesserungen
-- [ ] **Performance**: Caching, Lazy Loading
-- [ ] **SEO**: Meta-Tags, Sitemap
-- [ ] **Accessibility**: ARIA-Labels, Keyboard Navigation
-- [ ] **Internationalization**: Mehrsprachige Unterstützung
-- [ ] **Dark Mode**: Dunkles Design-Theme
 
 ## 🤝 Beitragen
 
