@@ -324,16 +324,16 @@ erDiagram
 
 ---
 
-## 🗓️ Beispiel-Arbeitsplan (1 Woche)
+## 🗓️ Beispiel-Arbeitsplan (7 Stunden)
 
-| Tag         | Aufgabe                                                                 |
+| Stunde      | Aufgabe                                                                 |
 |-------------|-------------------------------------------------------------------------|
-| Tag 1 (Mo)  | Projekt-Setup, GitHub-Repo, Grundstruktur Backend & Frontend            |
-| Tag 2 (Di)  | Datenbankmodell & JPA-Entities, erste REST-Endpoints, User-Auth         |
-| Tag 3 (Mi)  | Frontend: Routing, Grundlayout, Auth-Formulare, API-Anbindung           |
-| Tag 4 (Do)  | Rezept-CRUD (Backend & Frontend), Testdaten, erste UI-Komponenten       |
-| Tag 5 (Fr)  | Bewertungssystem & Favoriten (Backend & Frontend), UI-Feinschliff       |
-| Tag 6 (Sa)  | Tests (Backend & Frontend), Fehlerbehandlung, Dokumentation             |
-| Tag 7 (So)  | Review, Refactoring, Deployment-Vorbereitung, Präsentation vorbereiten  |
+| Stunde 1    | Projekt-Setup, GitHub-Repo, Grundstruktur Backend & Frontend            |
+| Stunde 2    | Datenbankmodell & JPA-Entities, erste REST-Endpoints, User-Auth         |
+| Stunde 3    | Frontend: Routing, Grundlayout, Auth-Formulare, API-Anbindung           |
+| Stunde 4    | Rezept-CRUD (Backend & Frontend), Testdaten, erste UI-Komponenten       |
+| Stunde 5    | Bewertungssystem & Favoriten (Backend & Frontend), UI-Feinschliff       |
+| Stunde 6    | Tests (Backend & Frontend), Fehlerbehandlung, Dokumentation             |
+| Stunde 7    | Review, Refactoring, Deployment-Vorbereitung, Präsentation vorbereiten  |
 
 > Die Aufgaben können je nach Fortschritt und Teamgröße angepasst werden. 
