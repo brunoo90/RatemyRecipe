@@ -26,25 +26,62 @@ import com.example.RateMyRecipe.Security.UserDetailsImpl;
 import com.example.RateMyRecipe.repositories.RecipeRepository;
 import com.example.RateMyRecipe.repositories.UserRepository;
 
+/**
+ * REST-Controller für Rezept-bezogene Operationen.
+ * 
+ * <p>Dieser Controller stellt alle CRUD-Operationen für Rezepte bereit und implementiert
+ * zusätzliche Funktionen wie Suche, Kategoriefilterung und Top-Bewertungen. Alle Endpunkte
+ * sind unter dem Pfad "/api/recipes" verfügbar.</p>
+ * 
+ * <p>Der Controller implementiert rollenbasierte Sicherheit und stellt sicher, dass
+ * Benutzer nur ihre eigenen Rezepte bearbeiten können (außer Admins).</p>
+ * 
+ * @author RateMyRecipe Team
+ * @version 1.0
+ * @since 2024
+ * @see Recipe
+ * @see User
+ */
 @RestController
 @RequestMapping("/api/recipes")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class RecipeController {
 
+    /**
+     * Repository für Rezept-Datenbankoperationen.
+     */
     @Autowired
     private RecipeRepository recipeRepository;
 
+    /**
+     * Repository für Benutzer-Datenbankoperationen.
+     */
     @Autowired
     private UserRepository userRepository;
 
-    // Alle Rezepte abrufen
+    /**
+     * Ruft alle verfügbaren Rezepte ab.
+     * 
+     * <p>Dieser Endpunkt ist öffentlich zugänglich und gibt eine Liste aller
+     * Rezepte in der Datenbank zurück.</p>
+     * 
+     * @return ResponseEntity mit einer Liste aller Rezepte
+     */
     @GetMapping
     public ResponseEntity<List<Recipe>> getAllRecipes() {
         List<Recipe> recipes = recipeRepository.findAll();
         return ResponseEntity.ok(recipes);
     }
 
-    // Rezept nach ID abrufen
+    /**
+     * Ruft ein spezifisches Rezept anhand seiner ID ab.
+     * 
+     * <p>Dieser Endpunkt ist öffentlich zugänglich. Wenn das Rezept nicht gefunden wird,
+     * wird ein 404-Status zurückgegeben.</p>
+     * 
+     * @param id Die eindeutige ID des Rezepts
+     * @return ResponseEntity mit dem Rezept oder 404 wenn nicht gefunden
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Recipe> getRecipeById(@PathVariable Long id) {
         Optional<Recipe> recipe = recipeRepository.findById(id);
@@ -52,21 +89,45 @@ public class RecipeController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Rezepte nach Kategorie filtern
+    /**
+     * Ruft alle Rezepte einer bestimmten Kategorie ab.
+     * 
+     * <p>Die Suche ist case-insensitive und gibt alle Rezepte zurück,
+     * die der angegebenen Kategorie entsprechen.</p>
+     * 
+     * @param category Die Kategorie, nach der gefiltert werden soll
+     * @return ResponseEntity mit einer Liste der gefilterten Rezepte
+     */
     @GetMapping("/category/{category}")
     public ResponseEntity<List<Recipe>> getRecipesByCategory(@PathVariable String category) {
         List<Recipe> recipes = recipeRepository.findByCategoryIgnoreCase(category);
         return ResponseEntity.ok(recipes);
     }
 
-    // Rezepte durchsuchen
+    /**
+     * Durchsucht Rezepte nach Titel oder Beschreibung.
+     * 
+     * <p>Die Suche ist case-insensitive und durchsucht sowohl den Titel
+     * als auch die Beschreibung der Rezepte.</p>
+     * 
+     * @param query Der Suchbegriff
+     * @return ResponseEntity mit einer Liste der gefundenen Rezepte
+     */
     @GetMapping("/search")
     public ResponseEntity<List<Recipe>> searchRecipes(@RequestParam String query) {
         List<Recipe> recipes = recipeRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(query, query);
         return ResponseEntity.ok(recipes);
     }
 
-    // Neues Rezept erstellen
+    /**
+     * Erstellt ein neues Rezept.
+     * 
+     * <p>Dieser Endpunkt erfordert eine Benutzeranmeldung (USER oder ADMIN Rolle).
+     * Das erstellte Rezept wird automatisch dem aktuellen Benutzer als Autor zugewiesen.</p>
+     * 
+     * @param recipe Das zu erstellende Rezept (ohne ID und Autor)
+     * @return ResponseEntity mit dem erstellten Rezept oder 400 bei Fehlern
+     */
     @PostMapping
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Recipe> createRecipe(@RequestBody Recipe recipe) {
@@ -82,7 +143,17 @@ public class RecipeController {
         return ResponseEntity.badRequest().build();
     }
 
-    // Rezept aktualisieren
+    /**
+     * Aktualisiert ein bestehendes Rezept.
+     * 
+     * <p>Dieser Endpunkt erfordert eine Benutzeranmeldung. Nur der Autor des Rezepts
+     * oder ein Admin kann das Rezept bearbeiten. Bei unbefugtem Zugriff wird
+     * ein 403-Status zurückgegeben.</p>
+     * 
+     * @param id Die ID des zu aktualisierenden Rezepts
+     * @param recipeDetails Die neuen Rezeptdaten
+     * @return ResponseEntity mit dem aktualisierten Rezept, 403 bei unbefugtem Zugriff oder 404 wenn nicht gefunden
+     */
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @RequestBody Recipe recipeDetails) {
@@ -112,7 +183,16 @@ public class RecipeController {
         return ResponseEntity.notFound().build();
     }
 
-    // Rezept löschen
+    /**
+     * Löscht ein Rezept.
+     * 
+     * <p>Dieser Endpunkt erfordert eine Benutzeranmeldung. Nur der Autor des Rezepts
+     * oder ein Admin kann das Rezept löschen. Bei unbefugtem Zugriff wird
+     * ein 403-Status zurückgegeben.</p>
+     * 
+     * @param id Die ID des zu löschenden Rezepts
+     * @return ResponseEntity mit 200 bei erfolgreichem Löschen, 403 bei unbefugtem Zugriff oder 404 wenn nicht gefunden
+     */
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> deleteRecipe(@PathVariable Long id) {
@@ -133,14 +213,29 @@ public class RecipeController {
         return ResponseEntity.notFound().build();
     }
 
-    // Alle verfügbaren Kategorien abrufen
+    /**
+     * Ruft alle verfügbaren Kategorien ab.
+     * 
+     * <p>Dieser Endpunkt ist öffentlich zugänglich und gibt eine Liste aller
+     * in der Datenbank verwendeten Kategorien zurück.</p>
+     * 
+     * @return ResponseEntity mit einer Liste aller Kategorien
+     */
     @GetMapping("/categories")
     public ResponseEntity<List<String>> getAllCategories() {
         List<String> categories = recipeRepository.findDistinctCategories();
         return ResponseEntity.ok(categories);
     }
 
-    // Top bewertete Rezepte abrufen
+    /**
+     * Ruft die am besten bewerteten Rezepte ab.
+     * 
+     * <p>Dieser Endpunkt ist öffentlich zugänglich und gibt eine Liste der
+     * Rezepte mit den höchsten Durchschnittsbewertungen zurück.</p>
+     * 
+     * @param limit Die maximale Anzahl der zurückgegebenen Rezepte (Standard: 10)
+     * @return ResponseEntity mit einer Liste der top-bewerteten Rezepte
+     */
     @GetMapping("/top-rated")
     public ResponseEntity<List<Recipe>> getTopRatedRecipes(@RequestParam(defaultValue = "10") int limit) {
         List<Recipe> recipes = recipeRepository.findTopRatedRecipes(limit);
