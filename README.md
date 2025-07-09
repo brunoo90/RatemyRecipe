@@ -261,16 +261,6 @@ Die API-Basis-URL kann in `src/services/api.js` konfiguriert werden.
 4. Push zum Branch (`git push origin feature/AmazingFeature`)
 5. Öffne einen Pull Request
 
-## 📝 Lizenz
-
-Dieses Projekt ist unter der MIT-Lizenz lizenziert - siehe [LICENSE](LICENSE) Datei für Details.
-
-## 👨‍💻 Autor
-
-**Rate My Recipe Team**
-- Email: contact@ratemyrecipe.com
-- GitHub: [@ratemyrecipe](https://github.com/ratemyrecipe)
-
 ## 🙏 Danksagungen
 
 - [Spring Boot](https://spring.io/projects/spring-boot) für das Backend-Framework
