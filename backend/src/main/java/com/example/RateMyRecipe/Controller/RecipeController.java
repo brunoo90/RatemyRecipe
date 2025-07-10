@@ -1,5 +1,7 @@
 package com.example.RateMyRecipe.Controller;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,13 +20,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.RateMyRecipe.Model.Recipe;
 import com.example.RateMyRecipe.Model.User;
 import com.example.RateMyRecipe.Security.UserDetailsImpl;
 import com.example.RateMyRecipe.repositories.RecipeRepository;
 import com.example.RateMyRecipe.repositories.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.validation.Valid;
 
 /**
  * REST-Controller für Rezept-bezogene Operationen.
@@ -130,17 +137,69 @@ public class RecipeController {
      */
     @PostMapping
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<Recipe> createRecipe(@RequestBody Recipe recipe) {
+    public ResponseEntity<?> createRecipe(@Valid @RequestBody Recipe recipe) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        
         Optional<User> user = userRepository.findById(userDetails.getId());
         if (user.isPresent()) {
             recipe.setAuthor(user.get());
             Recipe savedRecipe = recipeRepository.save(recipe);
             return ResponseEntity.ok(savedRecipe);
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body("Fehler: Benutzer nicht gefunden.");
+    }
+
+    /**
+     * Erstellt ein neues Rezept mit Bild-Upload (Multipart).
+     *
+     * <p>Dieser Endpunkt akzeptiert Multipart/FormData und verarbeitet optionale Bilddateien.</p>
+     *
+     * @param title Titel des Rezepts
+     * @param description Beschreibung
+     * @param ingredients Zutaten (als JSON-Array-String)
+     * @param instructions Zubereitung
+     * @param image Bilddatei (optional)
+     * @return ResponseEntity mit dem erstellten Rezept oder Fehler
+     */
+    @CrossOrigin(origins = "http://localhost:5173")
+    @PostMapping(value = "/multipart", consumes = {"multipart/form-data"})
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<?> createRecipeMultipart(
+            @RequestPart("title") String title,
+            @RequestPart("description") String description,
+            @RequestPart("ingredients") String ingredientsJson,
+            @RequestPart("instructions") String instructions,
+            @RequestPart(value = "image", required = false) MultipartFile image
+    ) {
+        // Pflichtfeld-Validierung
+        if (title == null || title.isBlank()) return ResponseEntity.badRequest().body("Titel ist ein Pflichtfeld.");
+        if (description == null || description.isBlank()) return ResponseEntity.badRequest().body("Beschreibung ist ein Pflichtfeld.");
+        if (instructions == null || instructions.isBlank()) return ResponseEntity.badRequest().body("Zubereitung ist ein Pflichtfeld.");
+        if (ingredientsJson == null || ingredientsJson.isBlank()) return ResponseEntity.badRequest().body("Mindestens eine Zutat angeben.");
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            String[] ingredientsArr = mapper.readValue(ingredientsJson, String[].class);
+            if (ingredientsArr.length == 0) return ResponseEntity.badRequest().body("Mindestens eine Zutat angeben.");
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+            Optional<User> user = userRepository.findById(userDetails.getId());
+            if (user.isEmpty()) return ResponseEntity.badRequest().body("Fehler: Benutzer nicht gefunden.");
+            Recipe recipe = new Recipe();
+            recipe.setTitle(title);
+            recipe.setDescription(description);
+            recipe.setInstructions(instructions);
+            recipe.setIngredients(Arrays.asList(ingredientsArr));
+            recipe.setAuthor(user.get());
+            // Bild-Upload: Hier ggf. Bild speichern und URL setzen
+            if (image != null && !image.isEmpty()) {
+                // TODO: Bild speichern und URL setzen
+                recipe.setImageUrl("/images/" + image.getOriginalFilename());
+            }
+            Recipe savedRecipe = recipeRepository.save(recipe);
+            return ResponseEntity.ok(savedRecipe);
+        } catch (IOException e) {
+            return ResponseEntity.badRequest().body("Fehler beim Verarbeiten der Zutaten.");
+        }
     }
 
     /**

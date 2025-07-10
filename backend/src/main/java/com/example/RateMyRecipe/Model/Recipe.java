@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +11,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 /**
  * Entity-Klasse für Rezepte in der RateMyRecipe-Anwendung.
@@ -41,11 +43,13 @@ public class Recipe {
     /**
      * Titel des Rezepts.
      */
+    @NotBlank(message = "Titel darf nicht leer sein.")
     private String title;
 
     /**
      * Kurze Beschreibung des Rezepts.
      */
+    @NotBlank(message = "Beschreibung darf nicht leer sein.")
     private String description;
 
     /**
@@ -72,13 +76,15 @@ public class Recipe {
      * Detaillierte Zubereitungsanweisungen für das Rezept.
      * Maximale Länge: 5000 Zeichen.
      */
-    @Column(length = 5000)
+    @NotBlank(message = "Zubereitung darf nicht leer sein.")
+    @Size(max = 5000, message = "Zubereitung darf maximal 5000 Zeichen haben.")
     private String instructions;
 
     /**
      * Liste der Zutaten für das Rezept.
      */
     @ElementCollection
+    @NotEmpty(message = "Es müssen mindestens eine Zutat angegeben werden.")
     private List<String> ingredients = new ArrayList<>();
 
     /**
