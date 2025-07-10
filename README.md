@@ -2,6 +2,83 @@
 
 Eine moderne Webanwendung zum Erstellen, Bewerten und Verwalten von Rezepten mit React (Frontend) und Spring Boot (Backend).
 
+---
+
+## 💡 Projektidee
+
+Die Webanwendung RateMyRecipe ermöglicht es mehreren Benutzern, eigene Rezepte zu erstellen, zu verwalten und die Rezepte anderer zu bewerten. Zusätzlich können Nutzer fremde Rezepte als Favoriten speichern, um später leichter darauf zugreifen zu können. Die App unterscheidet zwischen normalen Benutzern (User) und Administratoren (Admin), wobei Admins erweiterte Rechte zur Moderation besitzen.
+
+> **Hinweis:**
+> - Die Admin-Funktion (Admin-Login mit Key, Admin-Löschrechte, User-Sperre) ist aktuell **nicht funktionsfähig**.
+> - **Bewerten von Rezepten** ist aktuell **nicht funktionsfähig**.
+> - **Registrierung neuer User** ist aktuell **nicht funktionsfähig**.
+> Alle anderen User-Funktionen (Rezepte, Favoriten) sind wie beschrieben implementiert und getestet.
+
+---
+
+## 📋 User Stories mit Akzeptanzkriterien
+
+### Rezepte erstellen
+- **Als User** möchte ich eigene Rezepte hinzufügen, damit ich meine Lieblingsgerichte mit anderen teilen kann.
+- **Akzeptanzkriterien:**
+  - Nur eingeloggte User können Rezepte erstellen. ✅
+  - Pflichtfelder: Titel, Zutaten, Zubereitung. ✅
+  - Rezept wird in der öffentlichen Rezeptliste angezeigt. ✅
+  - Das Rezept ist dauerhaft dem User zugeordnet. ✅
+
+### Eigene Rezepte bearbeiten oder löschen
+- **Als User** möchte ich meine eigenen Rezepte bearbeiten oder löschen können, damit ich sie bei Bedarf aktualisieren oder entfernen kann.
+- **Akzeptanzkriterien:**
+  - Nur der Ersteller sieht „Bearbeiten“ und „Löschen“ bei seinem eigenen Rezept. ✅
+  - Änderungen werden sofort gespeichert und angezeigt. ✅
+  - Nach dem Löschen verschwindet das Rezept sofort aus der Liste. ✅
+
+### Rezepte bewerten
+- **Als User** möchte ich fremde Rezepte bewerten, damit ich Feedback geben kann und andere gute Rezepte leichter finden.
+- **Akzeptanzkriterien:**
+  - Bewertung nur bei fremden Rezepten möglich. ❌
+  - Ein Rezept kann nur einmal pro User bewertet werden. ❌
+  - Bewertung besteht aus 1–5 Sternen, optional mit Kommentar. ❌
+  - Durchschnittsbewertung wird beim Rezept angezeigt. ❌
+  - Eigene Rezepte können nicht bewertet werden. ❌
+
+### Rezepte favorisieren
+- **Als User** möchte ich fremde Rezepte favorisieren, um sie schnell wiederzufinden.
+- **Akzeptanzkriterien:**
+  - Favorit-Button ist nur bei fremden Rezepten sichtbar. ✅
+  - Favorisierte Rezepte sind über „Meine Favoriten“ abrufbar. ✅
+  - Favoritenliste ist nur für den jeweiligen User sichtbar. ✅
+  - User können Rezepte aus der Favoritenliste entfernen. ✅
+
+### User-Registrierung
+- **Als Besucher** möchte ich mich als neuer User registrieren können, um eigene Rezepte zu erstellen und zu bewerten.
+- **Akzeptanzkriterien:**
+  - Registrierung mit Username, E-Mail und Passwort möglich. ❌
+  - Nach erfolgreicher Registrierung kann ich mich einloggen. ❌
+
+### Rezepte anderer Nutzer löschen (Admin)
+- **Als Admin** möchte ich Rezepte anderer Nutzer löschen können, wenn sie gegen Richtlinien verstoßen oder unpassend sind.
+- **Akzeptanzkriterien:**
+  - Admin sieht Löschen-Button bei allen Rezepten. ❌
+  - Nach dem Löschen wird das Rezept sofort aus der Liste entfernt. ❌
+  - Optional: Admin kann einen Löschgrund angeben (intern gespeichert). ❌
+
+### User temporär sperren (Admin)
+- **Als Admin** möchte ich Benutzer vorübergehend sperren können, damit sie keine Rezepte mehr hinzufügen oder bearbeiten können.
+- **Akzeptanzkriterien:**
+  - Admin kann eine Sperrfrist (z. B. in Tagen) setzen. ❌
+  - Gesperrte User sehen bei Rezepterstellung/-bearbeitung eine Fehlermeldung. ❌
+  - Nach Ablauf der Sperre werden die Rechte automatisch wieder freigegeben. ❌
+
+### Sich mit Admin-Key anmelden
+- **Als Nutzer** möchte ich mich durch Eingabe eines Admin-Keys als Admin anmelden, damit ich erweiterte Rechte erhalte.
+- **Akzeptanzkriterien:**
+  - Admin-Login erfolgt mit Eingabe eines gültigen Admin-Keys. ❌
+  - Wenn der Key korrekt ist, wird der Nutzer dauerhaft als „admin“ gespeichert. ❌
+  - Admins haben alle Rechte wie User, außer Favoritenfunktion. ❌
+
+---
+
 ## 🚀 Features
 
 ### ✅ Implementiert
