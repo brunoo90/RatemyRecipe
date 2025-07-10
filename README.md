@@ -292,3 +292,51 @@ Die API-Basis-URL kann in `src/services/api.js` konfiguriert werden.
 - [X] Dokumentation vervollständigen
 - [X] Deployment vorbereiten
 
+## 🗄️ Datenmodell
+
+```mermaid
+erDiagram
+    USER ||--o{ RECIPE : erstellt
+    USER ||--o{ RATING : gibt
+    USER ||--o{ FAVORITE : speichert
+    USER }o--|| ROLE : hat
+    RECIPE ||--o{ RATING : wird_bewertet
+    RECIPE ||--o{ FAVORITE : ist_favorit
+
+    USER {
+        Long id
+        String username
+        String email
+        String password
+    }
+    RECIPE {
+        Long id
+        String title
+        String description
+        String imageUrl
+        String category
+        Double averageRating
+        Integer ratingCount
+        String instructions
+        List<String> ingredients
+    }
+    RATING {
+        Long id
+        Integer stars
+        String comment
+    }
+    FAVORITE {
+        Long id
+    }
+    ROLE {
+        Long id
+        String name
+    }
+```
+
+## 🔗 Links & Ressourcen
+
+- [Spring Boot](https://spring.io/projects/spring-boot) für das Backend-Framework
+- [React](https://reactjs.org/) für das Frontend-Framework
+- [React Icons](https://react-icons.github.io/react-icons/) für die Icons
+- [Unsplash](https://unsplash.com/) für die Beispielbilder
