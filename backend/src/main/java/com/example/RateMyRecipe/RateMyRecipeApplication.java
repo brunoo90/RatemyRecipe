@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
  
 import com.example.RateMyRecipe.Model.ERole;
 import com.example.RateMyRecipe.Model.Role;
 import com.example.RateMyRecipe.repositories.RoleRepository;
  
 @SpringBootApplication
+@EnableMethodSecurity
 public class RateMyRecipeApplication implements CommandLineRunner {
  
     @Autowired

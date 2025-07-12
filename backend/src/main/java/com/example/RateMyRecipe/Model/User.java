@@ -65,6 +65,10 @@ public class User {
     @NotBlank
     private String email;
 
+    // Ergänzung: Vorname und Nachname
+    private String firstName;
+    private String lastName;
+
     /**
      * Set von Rollen, die dem Benutzer zugewiesen sind.
      * Lazy Loading für bessere Performance.
@@ -90,6 +94,22 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**

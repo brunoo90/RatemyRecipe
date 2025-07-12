@@ -33,4 +33,10 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     // Rezepte nach Erstellungsdatum sortiert abrufen (neueste zuerst)
     @Query("SELECT r FROM Recipe r ORDER BY r.id DESC")
     List<Recipe> findAllOrderByCreatedDateDesc();
+
+    List<Recipe> findByCategory(String category);
+    List<Recipe> findByAuthorId(long userId);
+
+    // Top 10 Rezepte nach durchschnittlicher Bewertung
+    List<Recipe> findTop10ByOrderByAverageRatingDesc();
 }

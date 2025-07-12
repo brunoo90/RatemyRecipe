@@ -1,6 +1,8 @@
 package com.example.RateMyRecipe.Security;
  
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,22 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
+    
+    // Öffentliche Endpunkte, die keine JWT-Authentifizierung benötigen
+    private static final List<String> PUBLIC_ENDPOINTS = Arrays.asList(
+        "/api/auth/",
+        "/api/recipes",
+        "/api/recipes/category/",
+        "/api/recipes/search",
+        "/api/recipes/categories",
+        "/api/recipes/top-rated"
+    );
+    
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getRequestURI();
+        return PUBLIC_ENDPOINTS.stream().anyMatch(path::startsWith);
+    }
  
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -48,7 +66,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
             return headerAuth.substring(7, headerAuth.length());
         }
-        logger.error("Cannot extract Bearer Token");
         return null;
     }
  

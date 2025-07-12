@@ -75,6 +75,7 @@ public class RecipeController {
      * @return ResponseEntity mit einer Liste aller Rezepte
      */
     @GetMapping
+    @PreAuthorize("permitAll()")
     public ResponseEntity<List<Recipe>> getAllRecipes() {
         List<Recipe> recipes = recipeRepository.findAll();
         return ResponseEntity.ok(recipes);
@@ -90,6 +91,7 @@ public class RecipeController {
      * @return ResponseEntity mit dem Rezept oder 404 wenn nicht gefunden
      */
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<Recipe> getRecipeById(@PathVariable Long id) {
         Optional<Recipe> recipe = recipeRepository.findById(id);
         return recipe.map(ResponseEntity::ok)
@@ -106,6 +108,7 @@ public class RecipeController {
      * @return ResponseEntity mit einer Liste der gefilterten Rezepte
      */
     @GetMapping("/category/{category}")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<List<Recipe>> getRecipesByCategory(@PathVariable String category) {
         List<Recipe> recipes = recipeRepository.findByCategoryIgnoreCase(category);
         return ResponseEntity.ok(recipes);
@@ -121,6 +124,7 @@ public class RecipeController {
      * @return ResponseEntity mit einer Liste der gefundenen Rezepte
      */
     @GetMapping("/search")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<List<Recipe>> searchRecipes(@RequestParam String query) {
         List<Recipe> recipes = recipeRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(query, query);
         return ResponseEntity.ok(recipes);

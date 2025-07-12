@@ -24,10 +24,10 @@ public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
  
     // aus application.properties
-    @Value("${myapp.jwtSecret}")
+    @Value("${app.jwtSecret}")
     private String jwtSecret;
  
-    @Value("${myapp.jwtExpirationMs}")
+    @Value("${app.jwtExpirationMs}")
     private int jwtExpirationMs;
  
     public String generateToken(String username) {

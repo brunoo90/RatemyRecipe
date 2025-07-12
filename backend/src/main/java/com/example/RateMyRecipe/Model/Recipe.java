@@ -107,6 +107,11 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Favorite> favorites;
 
+    // Ergänzung: Kochzeit, Portionen, Schwierigkeitsgrad
+    private Integer cookTime;
+    private Integer servings;
+    private String difficulty;
+
     /**
      * Standard-Konstruktor für Recipe.
      */
@@ -318,6 +323,19 @@ public class Recipe {
             this.ratingCount = 0;
         }
     }
+
+    // Setter und Getter für cookTime
+    public Integer getCookTime() { return cookTime; }
+    public void setCookTime(Integer cookTime) { this.cookTime = cookTime; }
+    // Setter und Getter für servings
+    public Integer getServings() { return servings; }
+    public void setServings(Integer servings) { this.servings = servings; }
+    // Setter und Getter für difficulty
+    public String getDifficulty() { return difficulty; }
+    public void setDifficulty(String difficulty) { this.difficulty = difficulty; }
+    // Setter und Getter für user (Alias für author)
+    public User getUser() { return author; }
+    public void setUser(User user) { this.author = user; }
 
     /**
      * Gibt eine String-Repräsentation des Rezepts zurück.

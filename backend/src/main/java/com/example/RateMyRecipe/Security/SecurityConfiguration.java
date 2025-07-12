@@ -14,10 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.http.HttpMethod;
-
-import com.example.RateMyRecipe.Security.AuthTokenFilter;
-import com.example.RateMyRecipe.Security.UserDetailsServiceImpl;
  
 @Configuration
 public class SecurityConfiguration {
@@ -50,7 +46,16 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
  
-    private static final String[] EVERYONE = { "/public", "/api/auth/**" };
+    private static final String[] EVERYONE = { 
+        "/public", 
+        "/api/auth/**",
+        "/api/recipes",
+        "/api/recipes/**",
+        "/api/recipes/category/**",
+        "/api/recipes/search",
+        "/api/recipes/categories",
+        "/api/recipes/top-rated"
+    };
  
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -58,10 +63,9 @@ public class SecurityConfiguration {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth.requestMatchers(EVERYONE).permitAll()
-                        .anyRequest().authenticated());
-        http.authenticationProvider(authenticationProvider());
-        http.addFilterBefore(authenticationJwtTokenFilter(),
-                UsernamePasswordAuthenticationFilter.class);
+                        .anyRequest().authenticated())
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }
